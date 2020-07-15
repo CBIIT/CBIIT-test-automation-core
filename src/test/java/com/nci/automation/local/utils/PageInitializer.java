@@ -1,7 +1,7 @@
 package com.nci.automation.local.utils;
 
-import com.nci.automation.pages.LoginPage;
-import com.nci.automation.steps.impl.LoginPageImpl;
+import com.nci.automation.pages.ITrustLoginPage;
+import com.nci.automation.steps.impl.ITrustLoginPageImpl;
 
 /**
  * This an initializer class which will initialize all pages classes.
@@ -10,14 +10,18 @@ import com.nci.automation.steps.impl.LoginPageImpl;
 public class PageInitializer { 
 
 	// declare protected static variables of types of all the pages
-	protected static LoginPage login;
-	protected static LoginPageImpl loginImpl;
+	protected static ITrustLoginPage iTrustloginPage;
+	protected static ITrustLoginPageImpl loginImpl;
+
 	
 	
 	public static void initializeAllPages() {
 		// create instances of all pages and assign them to the variables
-		 login = new LoginPage();
-		 loginImpl=new LoginPageImpl();
+		iTrustloginPage = new ITrustLoginPage();
+		 loginImpl=new ITrustLoginPageImpl();
+	
 	}
+	
+	
 	
 }

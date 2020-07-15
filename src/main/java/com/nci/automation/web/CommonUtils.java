@@ -12,11 +12,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchFrameException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.nci.automation.utils.LocalConfUtils;
 
 
 /**
@@ -70,7 +71,7 @@ public class CommonUtils extends WebDriverUtils{
 	 * @param dropDownElement Pass the WebElement of the desired dropDown.
 	 * @param ValueOfDropDown Pass the Visible text of DropDown to be selected.
 	 */
-	public static void selectDropDownValue(WebElement dropDownWebEl, String VisibleTextOfDD) {
+	public static void selectDropDownValue(String VisibleTextOfDD,WebElement dropDownWebEl) {
 		Select select = new Select(dropDownWebEl);
 		select.selectByVisibleText(VisibleTextOfDD);
 	}
@@ -80,7 +81,7 @@ public class CommonUtils extends WebDriverUtils{
 	 * @param dropDownElement Pass the value to be selected.
 	 * @param ValueOfDropDown Pass the WebElement of the dropDown.
 	 */
-	public static void selectDropDownValue(String value, WebElement element) {
+	public static void selectDropDownValue(WebElement element,String value) {
 		Select select = new Select(element);
 		select.selectByValue(value);
 	}
@@ -104,7 +105,7 @@ public class CommonUtils extends WebDriverUtils{
 	public static void acceptAlert() {
 
 		try {
-			Alert alert = getWebDriver().switchTo().alert();
+			Alert alert = webDriver.switchTo().alert();
 			alert.accept();
 		} catch (NoAlertPresentException e) {
 			System.out.println("Alert is not present");
@@ -120,7 +121,7 @@ public class CommonUtils extends WebDriverUtils{
 	public static void dismissAlert() {
 
 		try {
-			Alert alert = getWebDriver().switchTo().alert();
+			Alert alert = webDriver.switchTo().alert();
 			alert.dismiss();
 		} catch (NoAlertPresentException e) {
 			System.out.println("Alert is not present");
@@ -136,7 +137,7 @@ public class CommonUtils extends WebDriverUtils{
 	public static String getAlertText() {
 
 		try {
-			Alert alert = getWebDriver().switchTo().alert();
+			Alert alert = webDriver.switchTo().alert();
 			return alert.getText();
 		} catch (NoAlertPresentException e) {
 			System.out.println("Alert is not present");
@@ -154,7 +155,7 @@ public class CommonUtils extends WebDriverUtils{
 	public static void switchToFrame(String nameOrId) {
 
 		try {
-			getWebDriver().switchTo().frame(nameOrId);
+			webDriver.switchTo().frame(nameOrId);
 		} catch (NoSuchFrameException e) {
 			System.out.println("Frame is not present.");
 		}
@@ -166,7 +167,7 @@ public class CommonUtils extends WebDriverUtils{
 	 */
 	public static void switchToFrame(WebElement element) {
 		try {
-			getWebDriver().switchTo().frame(element);
+			webDriver.switchTo().frame(element);
 		} catch (NoSuchFrameException e) {
 			System.out.println("Frame is not present.");
 		}
@@ -180,7 +181,7 @@ public class CommonUtils extends WebDriverUtils{
 	public static void switchToFrame(int index) {
 
 		try {
-			getWebDriver().switchTo().frame(index);
+			webDriver.switchTo().frame(index);
 		} catch (NoSuchFrameException e) {
 			System.out.println("Frame is not present.");
 		}
@@ -221,8 +222,8 @@ public class CommonUtils extends WebDriverUtils{
 	 * {@code id} can be clicked in the page or {@code timeOut} whichever is
 	 * earlier.
 	 */
-	public static void waitUntilElemtTobeClickableById(WebDriver driver, long timeOut, String id) {
-		WebDriverWait webDriverWait = new WebDriverWait(driver, timeOut);
+	public static void waitUntilElemtTobeClickableById( long timeOut, String id) {
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, timeOut);
 		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id(id)));
 	}
 
@@ -232,7 +233,7 @@ public class CommonUtils extends WebDriverUtils{
 	 * earlier.
 	 */
 	public static void waitUntilElemtTobeClickableByXpath(long timeOut, String xpathExcpression) {
-		WebDriverWait webDriverWait = new WebDriverWait(getWebDriver(), timeOut);
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, timeOut);
 		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathExcpression)));
 	}
 	
@@ -243,9 +244,49 @@ public class CommonUtils extends WebDriverUtils{
 	 * @return This method will return boolean type either True or False.
 	 */
 	public static WebElement waitForThePresenceOfEl(String element, long timeOut) {
-		WebDriverWait wait = new WebDriverWait(getWebDriver(), timeOut);
+		WebDriverWait wait = new WebDriverWait(webDriver, timeOut);
 		return wait.until(ExpectedConditions.presenceOfElementLocated((By.xpath(element))));
 	}
+	
+	/**
+     * This method will create an Object of WebDriverWait
+     * 
+     * @return WebDriverWait
+     */
+     public static WebDriverWait getWaitObject() {
+    	 long explicitWait=Long.valueOf(LocalConfUtils.getProperty("explicitWaitInSeconds"));
+                 WebDriverWait wait = new WebDriverWait(webDriver, explicitWait);
+                 return wait;
+     }
+
+     /**
+     * This method will wait until element becomes clickable
+     * 
+     * @param element
+     */
+     public static void waitForClickability(WebElement element) {
+                 getWaitObject().until(ExpectedConditions.elementToBeClickable(element));
+     }
+
+     /**
+     * This method will wait until element becomes visible
+     * 
+     * @param element
+     */
+     public static void waitForVisibility(WebElement element) {
+                 getWaitObject().until(ExpectedConditions.visibilityOf(element));
+     }
+     
+
+     /**
+     * This method will wait until element becomes invisible
+     * 
+     * @param element
+     */
+     public static void waitForInvisibility(WebElement element) {
+                 getWaitObject().until(ExpectedConditions.invisibilityOf(element));
+     }
+
 	
 	/**
 	 * This method will select the specified day from the specified calendar table

@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nih.automation</groupId>
-	<artifactId>nci-test-automation</artifactId>
+	<artifactId>nci-test-automation-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 
@@ -194,7 +194,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>test-automation</projectName>
+							<projectName>nci-test-automation-core</projectName>
 							<!-- optional, per documentation set this to "true" to bypass generation 
 								of Cucumber Reports entirely, defaults to false if not specified -->
 							<!-- <skip>false</skip> -->
@@ -216,6 +216,6 @@
 	</build>
 
 
-	<name>nci-test-automation</name>
+	<name>nci-test-automation-core</name>
 
 </project>

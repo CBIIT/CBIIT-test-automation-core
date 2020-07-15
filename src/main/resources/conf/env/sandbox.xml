@@ -4,8 +4,7 @@
 
 	<application id="login">
 
-		<login_url>https://service-test.nci.nih.gov/nih-covid-19-dashboard
-		</login_url><!-- add test url -->
+		<login_url>https://service-sandbox.nci.nih.gov/nih-covid-19-dashboard</login_url><!-- add test url -->
 
 		<role name="Role">
 			<user id="regular">
@@ -39,7 +38,7 @@
 
 		<native>
 			<view>
-				<native_view_url>https://service-test.nci.nih.gov/ncisp</native_view_url><!-- Add native view url -->
+				<native_view_url>https://service-sandbox.nci.nih.gov/ncisp</native_view_url><!-- Add native view url -->
 			</view>
 		</native>
 

@@ -1,14 +1,12 @@
 package com.nci.automation.local.utils;
 
-import com.nci.automation.steps.impl.LoginPageImpl;
-import com.nci.automation.web.CommonUtils;
+import com.nci.automation.pages.ITrustLoginPage;
+import com.nci.automation.steps.impl.ITrustLoginPageImpl;
 
 public class PageCache {
 
 	private static ThreadLocal<PageCache> pageCache = new ThreadLocal<PageCache>();
 
-	
-	
 	private PageCache() {
 		// Private Constructor
 	}
@@ -21,23 +19,47 @@ public class PageCache {
 	}
 
 	// private pages variables
-	private LoginPageImpl loginPageImpl;
-	private CommonUtils commonUtils;
-	
-	
-	public CommonUtils getCommonUtils() {
-		if (commonUtils == null)
-			commonUtils = new CommonUtils();
-		return commonUtils;
-	}
-	
-	
-	public LoginPageImpl getLoginPageImpl() {
+	private ITrustLoginPageImpl loginPageImpl;
+
+
+	// private Pages variable if any
+	private ITrustLoginPage iTrustLoginPage;
+
+
+	// add implementation class object bellow
+	public ITrustLoginPageImpl getITrustLoginPageImpl() {
 		if (loginPageImpl == null)
-			loginPageImpl = new LoginPageImpl();
+			loginPageImpl = new ITrustLoginPageImpl();
 		return loginPageImpl;
 	}
+
+
+
+	// Pages Object below
+	public ITrustLoginPage getITrustLoginPage() {
+		if (iTrustLoginPage == null)
+			iTrustLoginPage = new ITrustLoginPage();
+		return iTrustLoginPage;
+	}
+
+
 	
 	
 
+	
+	/**
+	 * This method will destroy any object that was created.
+	 */
+	public void destroyInstances() {
+		
+		if (loginPageImpl != null)
+			loginPageImpl = null;
+
+		
+
+		if (iTrustLoginPage != null)
+			iTrustLoginPage = null;
+
+	
+	}
 }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <environment>
 
-		<profile-name>automation</profile-name>
-	
+	<profile-name>automation</profile-name>
+
 	<application id="login">
-		<login_url></login_url>
+		<login_url>https://service-dev2.nci.nih.gov/nih-covid-19-dashboard</login_url>
 		<role name="Role">
 			<user id="regular">
 				<name>regular</name>
-				<userId></userId>
-				<password></password>
+				<userId>c29oaWx6Mg==</userId><!-- add dev encrypted user -->
+				<password>d2UhY29tZTEyMzQ=</password><!-- add dev encrypted pass -->
 			</user>
 			<user id="Admin">
-				<name>Admin</name>
+				<name></name>
 				<userId></userId>
 				<password></password>
 			</user>
@@ -20,15 +20,20 @@
 		</role>
 
 		<db>
-
 			<default>
 				<driverclassname></driverclassname>
 				<url></url>
 				<username></username>
 				<password></password>
 			</default>
-
 		</db>
+
+		<native>
+			<view>
+				<native_view_url>https://service-dev2.nci.nih.gov/ncisp</native_view_url><!-- Add native view url -->
+			</view>
+		</native>
+		
 	</application>
 
 </environment>
